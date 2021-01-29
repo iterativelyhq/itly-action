@@ -7,7 +7,7 @@ async function run() {
         const expectedBranch = core.getInput('expected-branch');
         console.log(
             'Log local dir',
-            await fs.readDir('.'),
+            await fs.readdir('.'),
         );
         const itlyRcStr = await fs.readFile('.itlyrc', 'utf8');
         const itlyRc = JSON.parse(itlyRcStr);
