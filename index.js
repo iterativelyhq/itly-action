@@ -11,9 +11,10 @@ async function run() {
         );
         console.log(
             'Log local dir',
-            await fs.readdir('..'),
+            await fs.readdir('.'),
         );
         const itlyRcStr = await fs.readFile('.itlyrc', 'utf8');
+        console.log('itlyrc', itlyRcStr)
         const itlyRc = JSON.parse(itlyRcStr);
         core.setOutput("detected-branch", itlyRc.Branch);
         if (itlyRc.Branch !== expectedBranch) {
