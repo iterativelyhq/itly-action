@@ -13,8 +13,12 @@ async function run() {
     try {
         const expectedBranch = core.getInput('expected-branch');
         console.log(
+            'Log root dir',
+            await fs.readdir('/'),
+        );
+        console.log(
             'Log local dir',
-            await fs.readdir('.'),
+            await fs.readdir('..'),
         );
         const itlyRcStr = await fs.readFile('.itlyrc', 'utf8');
         const itlyRc = JSON.parse(itlyRcStr);
