@@ -12,16 +12,7 @@ const { promises: fs } = __nccwpck_require__(747)
 async function run() {
     try {
         const expectedBranch = core.getInput('expected-branch');
-        console.log(
-            'Log root dir',
-            await fs.readdir('/'),
-        );
-        console.log(
-            'Log local dir',
-            await fs.readdir('.'),
-        );
         const itlyRcStr = await fs.readFile('.itlyrc', 'utf8');
-        console.log('itlyrc', itlyRcStr)
         const itlyRc = JSON5.parse(itlyRcStr);
         core.setOutput("detected-branch", itlyRc.Branch);
         if (itlyRc.Branch !== expectedBranch) {
