@@ -1,5 +1,5 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
+const JSON5 = require('json5');
 const { promises: fs } = require('fs')
 
 async function run() {
@@ -15,7 +15,7 @@ async function run() {
         );
         const itlyRcStr = await fs.readFile('.itlyrc', 'utf8');
         console.log('itlyrc', itlyRcStr)
-        const itlyRc = JSON.parse(itlyRcStr);
+        const itlyRc = JSON5.parse(itlyRcStr);
         core.setOutput("detected-branch", itlyRc.Branch);
         if (itlyRc.Branch !== expectedBranch) {
             throw new Error(`Expected Itly branch to be [${expectedBranch}] but got [${itlyRc.Branch}]`);
