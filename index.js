@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const fs = require('fs/promises')
+const { promises: fs } = require('fs')
 
 async function run() {
     try {

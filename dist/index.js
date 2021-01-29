@@ -7,7 +7,7 @@ module.exports =
 
 const core = __nccwpck_require__(186);
 const github = __nccwpck_require__(438);
-const fs = __nccwpck_require__(225)
+const { promises: fs } = __nccwpck_require__(747)
 
 async function run() {
     try {
@@ -5827,14 +5827,6 @@ module.exports = require("events");;
 
 "use strict";
 module.exports = require("fs");;
-
-/***/ }),
-
-/***/ 225:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("fs/promises");;
 
 /***/ }),
 
