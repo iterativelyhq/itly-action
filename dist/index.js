@@ -7,19 +7,23 @@ module.exports =
 
 const core = __nccwpck_require__(186);
 const github = __nccwpck_require__(438);
+const fs = __nccwpck_require__(225)
 
-try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
-  // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload, undefined, 2)
-  console.log(`The event payload: ${payload}`);
-} catch (error) {
-  core.setFailed(error.message);
+async function run() {
+    try {
+        const expectedBranch = core.getInput('expected-branch');
+        const itlyRcStr = await fs.readFile('.itlyrc', 'utf8');
+        const itlyRc = JSON.parse(itlyRcStr);
+        core.setOutput("detected-branch", itlyRc.Branch);
+        if (itlyRc.Branch !== expectedBranch) {
+            throw new Error(`Expected Itly branch to be [${expectedBranch}] but got [${itlyRc.Branch}]`);
+        }
+    } catch (error) {
+        core.setFailed(error.message);
+    }
 }
+
+run();
 
 /***/ }),
 
@@ -5823,6 +5827,14 @@ module.exports = require("events");;
 
 "use strict";
 module.exports = require("fs");;
+
+/***/ }),
+
+/***/ 225:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("fs/promises");;
 
 /***/ }),
 
