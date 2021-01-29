@@ -1,21 +1,41 @@
-# Hello world javascript action
+<h1 align="center">
+  <img src="static/iteratively.svg" alt="Iteratively" title="Iteratively" height="100px" />
+</h1>
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+<h3 align="center">💬 <a href='https://iterative.ly' target='_blank'>Iteratively</a> is a tracking plan collaboration tool that helps data, marketing, and engineering keep aligned and up-to-date.</h3>
 
-## Inputs
+---
 
-### `who-to-greet`
+## Introduction
 
-**Required** The name of the person to greet. Default `"World"`.
+This [GitHub Action](https://github.com/features/actions) helps your team enforce the best-practice analytics workflow with Iteratively.
 
-## Outputs
+## Checks
+- **Branch** - check `.itlyrc` branch is valid before merging
+- **CI** - run `itly ci` on all PRs [coming soon]
 
-### `time`
+## Usage
+To get started, just add the following to your GitHub Workflow:
+```yml
+name: Itly
+on: [pull_request]
+jobs:
+  itly_branch:
+    runs-on: ubuntu-latest
+    name: Itly Branch Check
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check that correct branch is specified in .itlyrc
+      id: itly-branch
+      uses: iterativelyhq/itly-action@v2
+      with:
+        expected-branch: 'main'
+    - name: Report detected branch
+      run: echo "The branch we found in .itlyrc was [${{ steps['itly-branch'].outputs['detected-branch'] }}]"
+```
 
-The time we greeted you.
+## What is Iteratively?
+[Iteratively](https://iterative.ly) is a tracking plan collaboration tool that helps data, marketing, and engineering keep aligned and up-to-date.
 
-## Example usage
-
-uses: actions/hello-world-javascript-action@v1.1
-with:
-  who-to-greet: 'Mona the Octocat'
+## License
+TBD
