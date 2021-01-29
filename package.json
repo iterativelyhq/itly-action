@@ -1,0 +1,22 @@
+{
+  "name": "itly-action",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "git@github.com:iterativelyhq/itly-action.git",
+  "author": "Joe Reeve <joe@iterative.ly>",
+  "license": "Unknown",
+  "scripts": {
+    "build": "ncc build index.js --license licenses.txt"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn build"
+    }
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "@vercel/ncc": "^0.27.0",
+    "husky": "^4.3.8"
+  }
+}
